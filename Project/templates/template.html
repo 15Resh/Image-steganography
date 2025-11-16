@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Steganography</title>
+    <style>
+body { font-family: Arial, Helvetica, sans-serif; text-align: center; padding: 20px; background: linear-gradient(pink,rgb(158, 158, 205)),rgb(197, 137, 235); }
+.container{max-width: 600px; margin: auto;}
+.shadow-dance-text{
+    font-size: 2rem;
+    color: rgb(138, 80, 141);
+    text-shadow: 5px 5px 0 #cb50f0, 10px 10px 0 #9fdbf3;
+    animation: shadow-dance 2s infinite;
+
+}
+@keyframes shadow-dance{
+ 0%,100%{
+    text-shadow:5px 5px 0 #cb50f0, 10px 10px 0 #9fdbf3 ;
+ }
+ 50%{
+    text-shadow: -5px -5px 0 #cb50f0, -10px -10px 0 #9fdbf3;
+ }
+}
+.sub-container{border: 3px solid black; width: 600px;height: 600px;border-radius: 30px;}
+
+</style>
+</head>
+<body>
+    <div class="container">
+    <h2 class="shadow-dance-text">Image Steganography</h2>
+<div class="sub-container">
+    <h3 >Encode Image</h3>
+    <!-- <form action="/encode" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" required><br><br>
+        <input type="text" name="message" placeholder="Enter message" required>
+        <button type="submit">Encode</button>
+    </form> -->
+    <form action="/encode" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required><br><br><br>
+        <input type="text" name="message" placeholder="Enter secret message" required>
+        <input type="password" name="password" placeholder="Enter password" required>
+        <button type="submit">Encode Message</button><br><br><br>
+    </form>
+    
+    <form action="/decode" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required><br><br>
+        <input type="password" name="password" placeholder="Enter password" required>
+        <button type="submit">Decode Message</button>
+    </form>
+    
+    
+
+    <!-- <h3>Decode Image</h3>
+    <form action="/decode" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <button type="submit">Decode</button>
+    </form> -->
+</div>
+
+    {% if encoded_image %}
+    <h3>Encoded Image</h3>
+    <img src="{{ encoded_image }}" alt="Encoded Image">
+    {% endif %}
+
+    {% if decoded_message %}
+    <h3>Decoded Message</h3>
+    <p>{{ decoded_message }}</p>
+    {% endif %}
+</div>
+</body>
+</html>
